@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+    <!--ul中的功能是实现数据的显示-->
+        <ul>
+            {% for student in pagination.items %}
+                <li>{{ student.name}}</li>
+            {% endfor %}
+        </ul>
+    <!--nav是bootstrap模版中的分页样式，可以从bootcss网站中找到-->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            <!--判断，如果前一页没有数据，则将前一页链接设置为不可用-->
+                {% if pagination.has_prev %}
+                    <li class="page-item"><a class="page-link"
+                                             href="{{ url_for('first_blue.fenye') }}?page={{ pagination.prev_num }}&per_page={{ per_page }}">前一页</a>
+                    </li>
+                {% else %}
+                    <li class="disabled"><a class="page-link" href="#">前一页</a></li>
+                {% endif %}
+                <!--迭代pages-->
+                {%- for page in pagination.iter_pages() %}
+                    {% if page %}
+                        {% if page != pagination.page %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{{ url_for('first_blue.fenye') }}?page={{ page }}&per_page={{ per_page }}">{{ page }}</a>
+                            </li>
+                        {% else %}
+                            <li class="active">
+                                <a href="#" class="page-link">{{ page }}</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item">
+                            <a href="#" class="page-link">
+                                <span class=ellipsis>…</span>
+                            </a>
+                        </li>
+
+                    {% endif %}
+                {%- endfor %}
+<!--判断后一页是否还有数据-->
+            {% if pagination.has_next %}
+                    <li class="page-item"><a class="page-link"
+                                             href="{{ url_for('first_blue.fenye') }}?page={{ pagination.next_num }}&per_page={{ per_page }}">Next</a>
+                    </li>
+                {% else %}
+                    <li class="disabled"><a class="page-link" href="#">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock %}

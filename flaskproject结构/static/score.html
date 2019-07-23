@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>得分榜-前后端分离</title>
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.getJSON("/score/", function (data) {
+                console.log(data);
+                var scores = data["data"];
+                var $ul = $("#score_container");
+                for (var i = 0; i< scores.length; i++) {
+                     var $li = $("<li></li>").html(scores[i]);
+                    $ul.append($li);
+                }
+            })
+        })</script>
+</head>
+<body>
+<h1>flask中的前后端分离的实现，用ajax实现</h1>
+<ul id="score_container">
+
+</ul>
+</body>
+</html>

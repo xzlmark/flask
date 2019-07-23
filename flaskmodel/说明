@@ -1,0 +1,2 @@
+这个项目主要是model的使用，主要使用的数据库插件是flask-sqlalchemy，测试连接的有sqlite和MySQL数据库，实现了数据库的创建、
+数据的增、查等。
